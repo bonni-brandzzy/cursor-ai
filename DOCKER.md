@@ -11,6 +11,29 @@ Run the Cursor AI Chat API in Docker on a VM with API-key auth, a single worker 
   - `API_KEY` — protects your HTTP API (`X-API-Key` header)
   - `CURSOR_API_KEY` — from [Cursor Integrations](https://cursor.com/dashboard/integrations)
 
+## Automated VM setup (recommended)
+
+On Ubuntu/Debian with your domain DNS already pointing at the VM:
+
+```bash
+git clone https://github.com/bonni-brandzzy/cursor-ai.git /opt/cursor-ai
+cd /opt/cursor-ai
+sudo ./scripts/deploy-production.sh api.yourdomain.com you@yourdomain.com
+```
+
+The script will:
+
+1. Install Docker, git, certbot, and configure UFW (22, 80, 443)
+2. Clone or update the repo under `/opt/cursor-ai`
+3. Create `.env` interactively if missing
+4. Build and start the API + nginx
+5. Issue a Let's Encrypt certificate and enable HTTPS
+6. Schedule certificate renewal
+
+Override install path: `sudo INSTALL_DIR=/srv/cursor-ai ./scripts/deploy-production.sh ...`
+
+---
+
 ## 1. Configure environment
 
 Copy and edit secrets on the VM (never commit `.env`):

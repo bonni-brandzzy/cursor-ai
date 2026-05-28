@@ -119,6 +119,26 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 
 See [DOCKER.md](./DOCKER.md) for VM deployment, TLS, troubleshooting, and architecture.
 
+### One-command VM deploy (recommended)
+
+On a fresh Ubuntu/Debian VM (DNS A record pointing to the server):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/bonni-brandzzy/cursor-ai/main/scripts/deploy-production.sh -o deploy-production.sh
+chmod +x deploy-production.sh
+sudo ./deploy-production.sh api.yourdomain.com you@yourdomain.com
+```
+
+Or clone the repo and run:
+
+```bash
+git clone https://github.com/bonni-brandzzy/cursor-ai.git /opt/cursor-ai
+cd /opt/cursor-ai
+sudo ./scripts/deploy-production.sh api.yourdomain.com you@yourdomain.com
+```
+
+The script installs Docker, clones/updates the app, configures `.env`, nginx, Let's Encrypt TLS, and starts the stack.
+
 ## Project structure
 
 ```text
